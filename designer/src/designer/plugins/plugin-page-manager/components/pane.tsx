@@ -27,7 +27,6 @@ export default function Pane({ pluginContext }: {
 
   const closeEditorWindow = (resource: IPublicModelResource) => {
     workspace.removeEditorWindow(resource);
-    setSelectedId(null);
   };
 
   const addPage = async () => {
@@ -66,13 +65,10 @@ export default function Pane({ pluginContext }: {
 
     setWorkspaceResourceList(newResourceList);
 
-    if ((newResourceList.length === 0) && deletedResource) {
-      closeEditorWindow(deletedResource);
-      return;
-    }
+    closeEditorWindow(deletedResource!);
 
     // 如果删除了选中页面，选中下一个页面
-    if (id === selectedId) {
+    if (newResourceList.length > 0 && id === selectedId) {
       // 默认自动选中下一个页面，下一个页面的index就是被删除的index。如果删除的是最后一个页面，选中上一个页面
       const index = Math.min(selectedIndex, newResourceList.length - 1) ;
       selectPage(newResourceList[index]?.id || '');

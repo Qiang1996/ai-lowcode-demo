@@ -27,13 +27,16 @@ export default function PageSelector({
 								height: 72,
 								borderRadius: 6,
 								backgroundColor: '#f0f0f0',
-								textAlign: 'center',
-								lineHeight: '72px',
-								border: selectedId === item.id ? '2px solid #108cee' : 'none'
+								border: selectedId === item.id ? '2px solid #108cee' : 'none',
+								display: 'flex',
+								flexDirection: 'column',
+								alignItems: 'center',
+								justifyContent: 'center',
 							}}
 							onClick={() => onSelectPage(item.id!)}
 						>
-							{item.id}
+							<div>{item.id}</div>
+							<div>(这里是缩略图)</div>
 						</div>
 						<CloseCircleFilled style={{ fontSize: 14, color: '#666', cursor: 'pointer' }} onClick={() => onDeletePage(item.id!)} />
 					</div>
